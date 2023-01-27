@@ -1,21 +1,22 @@
-import { useState } from "react";
+import { NextPage } from "next";
+import { useSelector, useDispatch } from 'react-redux';
+import { increment, selectValue } from "../slices/counterSlice";
 
 interface Props {
   title: string;
 }
 
-const Header: React.FC<Props> = ({ title }) => {
+const Header: NextPage<Props> = ({ title }) => {
 	return <h1>{title ? title : "Default title"}</h1>;
 }
 
-const HomePage: React.FC = () => {
+const HomePage: NextPage = () => {
 	const products: Array<string> = ["Laptop", "Fone", "Celular"];
 
-	const [cart, setCart] = useState(0);
+	const count = useSelector(selectValue);
+	const dispatch = useDispatch();
 
-	const handleClick = () => {
-		setCart(cart + 1);
-	}
+	const handleClick = () => dispatch(increment())
 
 	return (
 		<div>
@@ -26,7 +27,7 @@ const HomePage: React.FC = () => {
 				))}
 			</ul>
 
-			<button onClick={handleClick}>Carrinho ({cart})</button>
+			<button onClick={handleClick}>Carrinho ({count})</button>
 		</div>
 	);
 }
