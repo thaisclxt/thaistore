@@ -1,0 +1,4 @@
+rulesets:
+  - typescript-best-practices
+  - jsx-react
+  - react-best-practices
