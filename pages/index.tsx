@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { apiURL } from "../api";
+import Product from "../components/product";
 import { increment, selectValue } from "../slices/counterSlice";
 
 interface Props {
@@ -18,7 +19,7 @@ const HomePage: NextPage = () => {
 	const sortBy: String = "name"
 	const orderBy: String = "DESC"
 
-	const [data, setData] = useState([])
+	const [data, setData] = useState<Array<any>>([])
 
 	useEffect(() => {
 		fetch(`${apiURL}/products?page=${page}&rows=${rows}&sortBy=${sortBy}&orderBy=${orderBy}`)
@@ -30,15 +31,16 @@ const HomePage: NextPage = () => {
 	const dispatch = useDispatch();
 
 	const handleClick = () => dispatch(increment())
-
+	
 	return (
 		<div>
 			<Header title="MKS Sistemas" />
-			<ul>
+
+			<div>
 				{data.map((item) => (
-					<li key={item}>{item.name}</li>
+					<Product item={item} />
 				))}
-			</ul>
+			</div>
 
 			<button onClick={handleClick}>Carrinho ({count})</button>
 		</div>
