@@ -1,5 +1,7 @@
 import { NextPage } from "next";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
+import { apiURL } from "../api";
 import { increment, selectValue } from "../slices/counterSlice";
 
 interface Props {
@@ -11,7 +13,18 @@ const Header: NextPage<Props> = ({ title }) => {
 }
 
 const HomePage: NextPage = () => {
-	const products: Array<string> = ["Laptop", "Fone", "Celular"];
+	const page: Number = 1
+	const rows: Number = 5
+	const sortBy: String = "name"
+	const orderBy: String = "DESC"
+
+	const [data, setData] = useState([])
+
+	useEffect(() => {
+		fetch(`${apiURL}/products?page=${page}&rows=${rows}&sortBy=${sortBy}&orderBy=${orderBy}`)
+			.then(response => response.json())
+			.then(data => setData(data.products));
+	}, [])
 
 	const count = useSelector(selectValue);
 	const dispatch = useDispatch();
@@ -22,8 +35,8 @@ const HomePage: NextPage = () => {
 		<div>
 			<Header title="MKS Sistemas" />
 			<ul>
-				{products.map((name) => (
-					<li key={name}>{name}</li>
+				{data.map((item) => (
+					<li key={item}>{item.name}</li>
 				))}
 			</ul>
 
