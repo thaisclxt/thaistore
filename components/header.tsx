@@ -18,22 +18,25 @@ const Title = styled.div`
     display: flex;
     align-items: baseline;
     padding: 15px 50px;
-
+    
     & h1 {
         font-weight: 600;
         font-size: 40px;
         margin-right: 8px;
     }
-
+    
     & h2 {
         font-weight: 300;
         font-size: 20px;
     }
-`
+    `
 
 const Wrapper = styled.div`
     background: #0F52BA;
     position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 `;
 
 const Header: NextPage<Props> = ({ title, subtitle, count }) => {

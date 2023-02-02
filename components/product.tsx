@@ -2,7 +2,6 @@ import { NextPage } from "next";
 
 interface Props {
     item: {
-
         id: number;
         name: string;
         brand: string;

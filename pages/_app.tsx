@@ -1,5 +1,5 @@
 import { AppProps } from "next/app";
-import { store } from '../store';
+import { store } from '../store/store';
 import { Provider } from 'react-redux';
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -8,6 +8,6 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
         </Provider>
     );
-};
-    
+}
+
 export default MyApp;
